@@ -17,7 +17,7 @@ upstream-koruos` · Tiers: `qemu | hw`
 | blk-nvme | koruos/blk.nvme | unikraft/* | donor-c | pci-enumeration | qemu | open | D |
 | drm-virtio-gpu | koruos/kms.drm | unikraft/linuxu-x86_64 | donor-c | pci-enumeration, virtio-pci-modern | qemu | open | D |
 | gpu-virgl-3d | koruos/kms.gpu3d | unikraft/linuxu-x86_64 | donor-c | drm-virtio-gpu | qemu | open | D |
-| usb-xhci | koruos/usb.host | unikraft/* | donor-c | pci-enumeration, irq-msix | qemu | open | D |
+| usb-xhci | koruos/usb.host | unikraft/* | donor-c | pci-enumeration, irq-msix | qemu | landed | M |
 | usb-hid | koruos/input.usb-hid | unikraft/* | donor-c | usb-xhci | qemu | open | D |
 | usb-storage | koruos/blk.usb | unikraft/* | donor-c | usb-xhci | qemu | open | D |
 | audio-hda | koruos/audio.pcm | unikraft/* | donor-c | pci-enumeration | qemu | open | D |

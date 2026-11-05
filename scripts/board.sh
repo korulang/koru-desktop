@@ -13,8 +13,8 @@ status_of() { # $1=name -> status field
   awk '/^status:/{print $2; exit}' "providers/$1/entry.md" 2>/dev/null
 }
 needs_of() { # $1=name -> needs list (comma/space separated, [] = none)
-  awk '/^needs:/{gsub(/[\[\]]/,""); print; exit}' "providers/$1/entry.md" 2>/dev/null \
-    | tr ',' ' '
+  awk '/^needs:/{sub(/^needs:[[:space:]]*/,""); gsub(/[\[\]]/,""); print; exit}' \
+    "providers/$1/entry.md" 2>/dev/null | tr ',' ' '
 }
 
 declare -A STATUS

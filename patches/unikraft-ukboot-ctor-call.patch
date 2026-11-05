@@ -1,0 +1,27 @@
+From: seat usb-xhci (koru-desktop)
+Subject: ukboot: cast init_array ctor call to the arg-taking signature
+
+lib/ukboot/boot.c calls `(*ctorfn)(argc, argv)` on entries typed
+`uk_ctor_func_t` = `void (*)()` (include/uk/ctors.h:45). Modern clang
+(C23 semantics for `()` — no longer "unspecified args") rejects the
+two-argument call: `too many arguments to function '*ctorfn'`.
+Cast at the call site so the argc/argv convention survives without
+changing the typedef or the ABI of the ctor table itself.
+
+Upstream status: not yet submitted (COCPORN fork working tree).
+---
+ lib/ukboot/boot.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/lib/ukboot/boot.c b/lib/ukboot/boot.c
+index abbb394f..141a9d02 100644
+--- a/lib/ukboot/boot.c
++++ b/lib/ukboot/boot.c
+@@ -486,7 +486,7 @@ int do_main(int argc, char *argv[])
+ 
+ 		uk_pr_debug("Call constructor: %p(%d, %p)...\n", *ctorfn,
+ 			    argc, argv);
+-		(*ctorfn)(argc, argv);
++		(*(void (*)(int, char **))*ctorfn)(argc, argv);
+ 	}
+ 
+ #if CONFIG_LIBUKPRINT_KLVL_INFO

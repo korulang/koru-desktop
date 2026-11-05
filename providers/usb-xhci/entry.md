@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [pci-enumeration, irq-msix]
 accept: accept.sh — guest enumerates a QEMU USB device on the xhci controller
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: M
+license: BSD-3-Clause (app/ is original work — no lifted code)
+provenance: original work written against xHCI 1.0/1.2 spec + QEMU hcd-xhci model (LGPL, read-only reference); xhci-nostd (Apache-2.0) read for orientation — no derivation; NONOS xhci capsule is AGPL-3.0+ — excluded per the diligence clause; donor fix: patches/unikraft-ukboot-ctor-call.patch (unikraft 3fdffba8, ukboot ctor signature, upstream status: fork-local)
 ---
 
 # usb-xhci
