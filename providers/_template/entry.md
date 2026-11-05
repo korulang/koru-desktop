@@ -11,6 +11,8 @@ qemu: -device <...>          # the device model this acceptance runs against
 tier: qemu                   # qemu | hw — hw = real hardware, later rung
 status: open                 # open | claimed | naive-wrap | idiomatic | landed | waived
 evidence: D                  # V | M | C | D — grade of current claims
+license: none-yet            # SPDX id(s) of derived code, or none-yet
+provenance: none-yet         # source repo@SHA + license for derived code
 ---
 
 # <slot-name>

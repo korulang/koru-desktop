@@ -11,6 +11,8 @@ home: this-repo
 donor: none
 lane: compose
 evidence: C
+license: BSD (lwIP + Unikraft — verify exact SPDX at pin time)
+provenance: unikraft/lib-lwip @ TBD-pins + drivers/virtio/net @ unikraft-staging 3fdffba8
 ---
 
 # net-virtio-lwip

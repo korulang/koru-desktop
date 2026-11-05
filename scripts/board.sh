@@ -22,7 +22,7 @@ for d in providers/*/; do
   n=$(basename "$d"); [ "$n" = "_template" ] && continue
   [ -f "$d/entry.md" ] || { echo "board: $n missing entry.md"; FAIL=1; continue; }
   s=$(status_of "$n"); STATUS[$n]="$s"
-  for f in name iface arms lane home needs accept tier status evidence; do
+  for f in name iface arms lane home needs accept tier status evidence license provenance; do
     grep -q "^$f:" "$d/entry.md" || { echo "board: $n entry.md missing field: $f"; FAIL=1; }
   done
   case "$s" in

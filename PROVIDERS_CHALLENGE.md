@@ -98,6 +98,19 @@ pinned platform docs under `platform/koru-os` (`origins.lock`).
 - **Every landed entry appends its catalog line** with evidence grade.
   An honest zero-census is a fine result.
 
+### Provenance and licensing — the diligence clause
+
+Any code derived from open source carries its receipt **in the same
+commit that introduces it**: source repo, upstream SHA (must match an
+`origins.lock` entry or be added to it), SPDX license identifier, and
+what was changed. Translations, lifts, and close mirrors count as
+derived. Firmware blobs are checked for redistribution terms before
+pinning. Copyleft contamination (GPL and kin) is named in the entry
+*before* the code lands — koru-os already routed around GPL lwext4
+once (BLOCKERS B2); do not repeat the discovery downstream. `board.sh`
+requires `license:`/`provenance:` fields on every entry; `none-yet` is
+honest only while no derived code exists.
+
 ### What "done" means per entry
 
 `status: landed` requires ALL of:

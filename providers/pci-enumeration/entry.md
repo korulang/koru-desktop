@@ -11,6 +11,8 @@ status: landed
 home: upstream-koruos
 lane: upstream-koruos
 evidence: M
+license: none (no code in this repo — upstream evidence cited)
+provenance: upstream: Cypoe/koru-os @ c7c3474 — see evidence/UPSTREAM.md
 ---
 
 # pci-enumeration

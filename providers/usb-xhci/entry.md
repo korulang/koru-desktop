@@ -11,6 +11,8 @@ status: open
 home: this-repo
 donor: unikraft-fork
 evidence: D
+license: none-yet
+provenance: none-yet — record source+SHA+license before first derived line
 ---
 
 # usb-xhci

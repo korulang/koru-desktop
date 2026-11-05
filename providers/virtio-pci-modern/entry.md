@@ -11,6 +11,8 @@ status: open
 home: this-repo
 donor: unikraft-fork
 evidence: V
+license: none-yet
+provenance: none-yet — record source+SHA+license before first derived line
 ---
 
 # virtio-pci-modern

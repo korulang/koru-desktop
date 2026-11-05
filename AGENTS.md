@@ -41,6 +41,27 @@ replication (the libudev-zero `make install` caveat in koru-os applies).
 - Append your line to `providers/CATALOG.md` on landing — that is how
   the next contestant knows the slot is gone.
 
+## Provenance & licensing — non-negotiable
+
+Anything derived from open code names its source **at the point of
+derivation**, not at audit time:
+
+- Every `entry.md` carries `license:` + `provenance:` fields; `board.sh`
+  requires them. `none-yet` is honest for slots with no code; it is
+  never a substitute for recording once code exists.
+- Derived files carry a header naming: source repo, upstream SHA,
+  license, what was changed. Patches additionally record upstream
+  submission status (the `patches/` convention).
+- Firmware blobs and non-free components are checked for redistribution
+  terms **before** they enter `origins.lock` — the net-wifi entry already
+  flags this; it applies to every slot.
+- Copyleft is a design input, not a surprise: upstream lwext4 is
+  GPL-2.0 (koru-os BLOCKERS B2 already routed around it once). A
+  `donor-c`/`silo` lane that would pull GPL into the image says so in
+  the entry *before* the code lands, not after.
+- "Derived" includes translated, lifted, and closely-mirrored code —
+  the UNIKRAFT_CHALLENGE lifts are derivations and carry the same duty.
+
 ## Boundaries (where work goes instead)
 
 | work | home |
