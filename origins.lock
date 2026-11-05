@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "name": "koru-os",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/Cypoe/koru-os.git",
+        "revision": "c7c3474347763b1a21d0bff94816fa5da6412ef3"
+      },
+      "target": "platform/koru-os",
+      "role": "platform contract — consumed read-mostly; provider-row asks go upstream"
+    },
+    {
+      "name": "koru",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/korulang/koru.git",
+        "revision": "91014797685fd4ffe567b4c59cfb577bb41f66f7"
+      },
+      "target": "toolchain/koru",
+      "role": "koruc compiler — builds all .k/.kz programs"
+    },
+    {
+      "name": "koru-libs",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/korulang/koru-libs.git",
+        "revision": "0fcacb97c1e87c036fb260984a1c9788ae27c671"
+      },
+      "target": "libs/koru-libs",
+      "role": "packages incl. unikraft/* lifts — consumed via koru.json paths"
+    },
+    {
+      "name": "unikraft-stable",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/unikraft.git",
+        "revision": "7351f8b563c9e6773da9fdd5bacde6ac91e32112"
+      },
+      "target": "donors/unikraft-stable",
+      "role": "L2 arm donor — kraft stable channel; the arm that boots Hyprland (koru-os origins.lock pin)"
+    },
+    {
+      "name": "unikraft-staging",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/unikraft.git",
+        "revision": "3fdffba8d7a938b56fdf628963061bba9b2ff54f"
+      },
+      "target": "donors/unikraft-staging",
+      "role": "staging donor — the tree koru-libs unikraft/* lifts were built against (~/src/unikraft, COCPORN fork remote)"
+    },
+    {
+      "name": "oshun",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/korulang/oshun.git",
+        "revision": "1adc1171775d26102ce80f05c77ca873335f3001"
+      },
+      "target": "surface/oshun",
+      "role": "host surface — the acceptance consumer; gains host/index.<platform>.kz parts downstream"
+    }
+  ]
+}

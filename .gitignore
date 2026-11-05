@@ -1,0 +1,6 @@
+.DS_Store
+*.iso
+*.img
+*.qcow2
+build/
+evidence/**/serial.log.bak
