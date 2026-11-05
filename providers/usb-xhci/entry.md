@@ -47,3 +47,8 @@ slots, not crash.
   (found in research — keybs/mice/disk on root ports only, no isoc);
   `suhteevah/xhci-nostd` is a Rust no_std reference. Worth reading
   before authorship — evidence class C until read.
+- **COPYLEFT TRIPWIRE (scout census 2026-11-05):** the most complete
+  prior art, the NONOS xhci capsule, is **AGPL-3.0+** — read it for
+  facts, never derive from it. `suhteevah/xhci-nostd` (Apache-2.0) is
+  the clean lift candidate. Full census: `design.md` +
+  `evidence/prior-art-census.md`.
