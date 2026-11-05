@@ -1,0 +1,3 @@
+$(eval $(call addlib,appnetlwip))
+
+APPNETLWIP_SRCS-y += $(APPNETLWIP_BASE)/main.c

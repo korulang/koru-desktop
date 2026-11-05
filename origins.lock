@@ -10,7 +10,7 @@
         "revision": "c7c3474347763b1a21d0bff94816fa5da6412ef3"
       },
       "target": "platform/koru-os",
-      "role": "platform contract — consumed read-mostly; provider-row asks go upstream"
+      "role": "platform contract \u2014 consumed read-mostly; provider-row asks go upstream"
     },
     {
       "name": "koru",
@@ -21,7 +21,7 @@
         "revision": "91014797685fd4ffe567b4c59cfb577bb41f66f7"
       },
       "target": "toolchain/koru",
-      "role": "koruc compiler — builds all .k/.kz programs"
+      "role": "koruc compiler \u2014 builds all .k/.kz programs"
     },
     {
       "name": "koru-libs",
@@ -32,7 +32,7 @@
         "revision": "0fcacb97c1e87c036fb260984a1c9788ae27c671"
       },
       "target": "libs/koru-libs",
-      "role": "packages incl. unikraft/* lifts — consumed via koru.json paths"
+      "role": "packages incl. unikraft/* lifts \u2014 consumed via koru.json paths"
     },
     {
       "name": "unikraft-stable",
@@ -43,7 +43,7 @@
         "revision": "7351f8b563c9e6773da9fdd5bacde6ac91e32112"
       },
       "target": "donors/unikraft-stable",
-      "role": "L2 arm donor — kraft stable channel; the arm that boots Hyprland (koru-os origins.lock pin)"
+      "role": "L2 arm donor \u2014 kraft stable channel; the arm that boots Hyprland (koru-os origins.lock pin)"
     },
     {
       "name": "unikraft-staging",
@@ -54,7 +54,18 @@
         "revision": "3fdffba8d7a938b56fdf628963061bba9b2ff54f"
       },
       "target": "donors/unikraft-staging",
-      "role": "staging donor — the tree koru-libs unikraft/* lifts were built against (~/src/unikraft, COCPORN fork remote)"
+      "role": "staging donor \u2014 the tree koru-libs unikraft/* lifts were built against (~/src/unikraft, COCPORN fork remote)"
+    },
+    {
+      "name": "lib-lwip",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/lib-lwip.git",
+        "revision": "ec55ae17618feeb57c8c10109bcf5c42723e8e95"
+      },
+      "target": "donors/lib-lwip",
+      "role": "net-virtio-lwip provider \u2014 POSIX socket API over lwIP; build-time fetch of fork-lwip UNIKRAFT-2_1_x pinned below"
     },
     {
       "name": "oshun",
@@ -65,7 +76,18 @@
         "revision": "1adc1171775d26102ce80f05c77ca873335f3001"
       },
       "target": "surface/oshun",
-      "role": "host surface — the acceptance consumer; gains host/index.<platform>.kz parts downstream"
+      "role": "host surface \u2014 the acceptance consumer; gains host/index.<platform>.kz parts downstream"
+    },
+    {
+      "name": "fork-lwip",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/fork-lwip.git",
+        "revision": "bef26c44236a078d4352e76392ef16f019bea501"
+      },
+      "target": "donors/fork-lwip",
+      "role": "net-virtio-lwip provider \u2014 upstream lwIP core fetched by lib-lwip Makefile.uk at build time (branch UNIKRAFT-2_1_x)"
     }
   ]
 }

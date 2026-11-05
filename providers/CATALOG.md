@@ -13,7 +13,7 @@ upstream-koruos` · Tiers: `qemu | hw`
 | pci-enumeration | koruos/pci | — | upstream-koruos | — | qemu | **landed** | M |
 | irq-msix | koruos/irq | — | upstream-koruos | pci-enumeration | qemu | **landed** | M |
 | virtio-pci-modern | koruos/virtio-pci | unikraft/* | donor-c | pci-enumeration | qemu | open | V |
-| net-virtio-lwip | koruos/net.tcp | unikraft/linuxu-x86_64 | compose | pci-enumeration | qemu | open | C |
+| net-virtio-lwip | koruos/net.tcp | unikraft/linuxu-x86_64 | compose | pci-enumeration | qemu | landed | C |
 | blk-nvme | koruos/blk.nvme | unikraft/* | donor-c | pci-enumeration | qemu | open | D |
 | drm-virtio-gpu | koruos/kms.drm | unikraft/linuxu-x86_64 | donor-c | pci-enumeration, virtio-pci-modern | qemu | open | D |
 | gpu-virgl-3d | koruos/kms.gpu3d | unikraft/linuxu-x86_64 | donor-c | drm-virtio-gpu | qemu | open | D |

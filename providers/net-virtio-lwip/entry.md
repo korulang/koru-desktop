@@ -6,13 +6,13 @@ donor: none — composition of existing parts
 needs: [pci-enumeration]
 accept: accept.sh — guest obtains IPv4 on user-net and reaches the host
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: none
 lane: compose
 evidence: C
-license: BSD (lwIP + Unikraft — verify exact SPDX at pin time)
-provenance: unikraft/lib-lwip @ TBD-pins + drivers/virtio/net @ unikraft-staging 3fdffba8
+license: BSD-3-Clause (unikraft, lib-lwip, fork-lwip — no copyleft; no firmware blobs)
+provenance: unikraft-staging 3fdffba8 + lib-lwip ec55ae17 + fork-lwip bef26c44 (all in origins.lock); zero derived code — composition of upstream objects only
 ---
 
 # net-virtio-lwip
