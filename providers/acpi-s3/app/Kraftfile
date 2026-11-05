@@ -1,0 +1,13 @@
+spec: v0.6
+
+name: acpis3
+
+unikraft:
+  source: /Users/larsde/src/unikraft
+  kconfig:
+    CONFIG_LIBUKBUS_PCI: 'y'
+    CONFIG_LIBUKALLOC: 'y'
+    CONFIG_LIBUKPAGING: 'y'
+
+targets:
+- qemu/x86_64
