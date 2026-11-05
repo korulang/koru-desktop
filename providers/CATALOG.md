@@ -19,7 +19,7 @@ upstream-koruos` · Tiers: `qemu | hw`
 | gpu-virgl-3d | koruos/kms.gpu3d | unikraft/linuxu-x86_64 | donor-c | drm-virtio-gpu | qemu | open | D |
 | usb-xhci | koruos/usb.host | unikraft/* | donor-c | pci-enumeration, irq-msix | qemu | landed | M |
 | usb-hid | koruos/input.usb-hid | unikraft/* | donor-c | usb-xhci | qemu | open | D |
-| usb-storage | koruos/blk.usb | unikraft/* | donor-c | usb-xhci | qemu | open | D |
+| usb-storage | koruos/blk.usb | unikraft/* | donor-c | usb-xhci | qemu | landed | D |
 | audio-hda | koruos/audio.pcm | unikraft/* | donor-c | pci-enumeration | qemu | open | D |
 | acpi-s3 | koruos/power.s3 | unikraft/* | donor-c | — | qemu | open | D |
 | net-wifi | koruos/net.wifi | — | donor-c | pci-enumeration | **hw** | open | D |

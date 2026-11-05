@@ -1,0 +1,5 @@
+$(eval $(call addlib,appusbstorage))
+
+APPUSBSTORAGE_SRCS-y += $(APPUSBSTORAGE_BASE)/main.c
+APPUSBSTORAGE_SRCS-y += $(APPUSBSTORAGE_BASE)/xhci.c
+APPUSBSTORAGE_SRCS-y += $(APPUSBSTORAGE_BASE)/msc.c

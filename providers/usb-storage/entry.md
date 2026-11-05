@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [usb-xhci]
 accept: accept.sh — guest reads a host-written pattern off a usb-storage disk
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
 evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+license: BSD-3-Clause (own driver code over unikraft-staging BSD-3 — no copyleft, no blobs)
+provenance: xhci.c/xhci.h derived from sibling usb-xhci driver (in-repo, BSD-3, spec-authored); msc.c BOT/SCSI layer written from USB MSC BOT 1.0 + SBC specs; unikraft-staging 3fdffba8 in origins.lock
 ---
 
 # usb-storage
