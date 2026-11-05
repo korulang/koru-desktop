@@ -47,3 +47,4 @@ pci-enumeration ─┬─ virtio-pci-modern ─ drm-virtio-gpu ─ gpu-virgl-3d
 New slot = new `providers/<name>/` dir (copy `_template/`), a row here,
 and — if it demands a `koruos/*` iface that doesn't exist upstream — a
 provider-row ask filed to koru-os, not invented locally.
+| blk-nvme | koruos/blk.nvme | landed | QEMU NVMe driver authored in-repo (probe→BAR0→admin/IO queues→read/write/flush); accept.sh: serial 'korudesktop' identified, host-planted pattern read, guest pattern verified by host dd/cmp, wrong serial refused |

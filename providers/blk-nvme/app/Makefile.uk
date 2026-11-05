@@ -1,0 +1,3 @@
+$(eval $(call addlib,appblknvme))
+
+APPBLKNVME_SRCS-y += $(APPBLKNVME_BASE)/main.c

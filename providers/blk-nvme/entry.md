@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [pci-enumeration]
 accept: accept.sh — guest reads/writes the NVMe namespace; host verifies
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: V
+license: BSD-3-Clause (driver authored here; PCI registration shape follows unikraft ukbus/pci)
+provenance: authored in-repo against NVMe 1.4 spec + QEMU nvme device model (vendor 0x1b36/0x0010); ukbus/pci driver pattern from unikraft-fork @ origins.lock pin
 ---
 
 # blk-nvme
