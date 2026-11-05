@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [pci-enumeration, virtio-pci-modern]
 accept: accept.sh — unmodified libdrm/modetest or kmscube on /dev/dri/card0
 tier: qemu
-status: open
+status: claimed
 home: this-repo
 donor: unikraft-fork
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: M
+license: BSD-3-Clause (app/ is original work)
+provenance: original work against virtio 1.0 + virtio-gpu specs; transport/control path derived from same-author virtio-pci-modern probe (BSD-3-Clause); no foreign lifts
 ---
 
 # drm-virtio-gpu
@@ -26,6 +26,20 @@ provider exposing dumb buffers + CRTCs + fences the way koru-os's
 `korukms` already does for bochs-display (platform/koru-os `lib/korukms`,
 B18 — that provider is the reference implementation for the ioctl
 surface).
+
+## Acceptance
+
+`accept.sh` (current): boots qemu/x86_64 + `virtio-gpu-pci,disable-legacy=on`,
+driver negotiates VERSION_1 + runs the controlq chain through
+TRANSFER_2D/FLUSH, programs a 640x480 scanout; host-side `screendump vgpu0`
+pixel-check verifies painted bands (blue/red/green at fixed coords) —
+byte-verified, never self-report. Falsifiable: `-vga std` yields `found=0`
++ no scanout. PASSES both directions.
+
+Frozen-oracle wall (honest): `modetest`/`kmscube` on `/dev/dri/card0`
+needs the linuxu arm + a DRM ioctl personality (korukms port) — the
+virtio-gpu device path itself is proven; the ioctl surface is the
+remaining upstream piece (home: upstream-koruos per Notes).
 
 ## Acceptance
 
