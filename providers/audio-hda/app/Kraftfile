@@ -1,0 +1,13 @@
+spec: v0.6
+
+name: audiohda
+
+unikraft:
+  source: /Users/larsde/src/unikraft
+  kconfig:
+    CONFIG_LIBUKBUS: 'y'
+    CONFIG_LIBUKBUS_PCI: 'y'
+    CONFIG_LIBUKALLOC: 'y'
+
+targets:
+- qemu/x86_64

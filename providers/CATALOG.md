@@ -20,7 +20,7 @@ upstream-koruos` · Tiers: `qemu | hw`
 | usb-xhci | koruos/usb.host | unikraft/* | donor-c | pci-enumeration, irq-msix | qemu | landed | M |
 | usb-hid | koruos/input.usb-hid | unikraft/* | donor-c | usb-xhci | qemu | landed | M |
 | usb-storage | koruos/blk.usb | unikraft/* | donor-c | usb-xhci | qemu | landed | D |
-| audio-hda | koruos/audio.pcm | unikraft/* | donor-c | pci-enumeration | qemu | open | D |
+| audio-hda | koruos/audio.pcm | unikraft/* | donor-c | pci-enumeration | qemu | landed | D |
 | acpi-s3 | koruos/power.s3 | unikraft/* | donor-c | — | qemu | open | D |
 | net-wifi | koruos/net.wifi | — | donor-c | pci-enumeration | **hw** | open | D |
 | bluetooth | koruos/net.bluetooth | — | donor-c | pci-enumeration | **hw** | open | D |

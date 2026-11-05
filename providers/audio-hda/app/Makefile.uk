@@ -1,0 +1,4 @@
+$(eval $(call addlib,appaudiohda))
+
+APPAUDIOHDA_SRCS-y += $(APPAUDIOHDA_BASE)/main.c
+APPAUDIOHDA_SRCS-y += $(APPAUDIOHDA_BASE)/hda.c

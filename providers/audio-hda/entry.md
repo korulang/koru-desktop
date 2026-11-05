@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [pci-enumeration]
 accept: accept.sh — guest opens PCM capture+playback; loopback pattern verified
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
 evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+license: BSD-3-Clause (own driver code over unikraft-staging BSD-3 — no copyleft, no blobs)
+provenance: hda.c written from Intel HDA spec 097a0384 (register/verb vocabulary is the spec’s); unikraft-staging 3fdffba8 in origins.lock; pci cfg32 helper pattern follows in-repo xhci.c (BSD-3)
 ---
 
 # audio-hda
