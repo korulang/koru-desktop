@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [usb-xhci]
 accept: accept.sh — usb-kbd/usb-mouse events reach evdev; host sees them
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: M
+license: BSD-3-Clause (app/ is original work — derived from same-author usb-xhci driver)
+provenance: derived from usb-xhci/app a075553 (same author, BSD-3-Clause); HID/report logic original against USB 2.0 + HID 1.11 + xHCI 1.0 specs; NONOS xhci capsule AGPL-3.0+ excluded per diligence clause
 ---
 
 # usb-hid

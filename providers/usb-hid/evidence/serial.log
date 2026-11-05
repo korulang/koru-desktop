@@ -1,0 +1,16 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+06FD1D10+06F31D10 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..usb-hid: pci probe dev=1b36:000d
+xhci: pci 1b36:000d class 00000c00/00000003 bar0=febf0000xhci: hci v1.00 slots=64 ints=16 ports=8 scratch=0 caplen=64 dboff=2000 rtsoff=1000xhci: reset done sts=1xhci: running sts=0xhci: port0 sc=000202a0 ccs=0 speed=0xhci: port1 sc=000202a0 ccs=0 speed=0xhci: port2 sc=000202a0 ccs=0 speed=0xhci: port3 sc=000202a0 ccs=0 speed=0xhci: port4 sc=00020ee1 ccs=1 speed=3xhci: port4 post-reset sc=00220e03 ped=1 speed=3xhci: enable slot -> id=1xhci: address device rc=1xhci: get-device-descriptor cc=1xhci: devdesc len=18 vid=0627 pid=0001xhci: enumerated vid=0627 pid=0001usb-hid: slot=1 enumerated — continuing to HID
+usb-hid: config total=34
+usb-hid: iface=0 proto=1 ep=0x81 mps=8 ival=7 cfg=1
+usb-hid: configure ep dci=3 rc=1
+usb-hid: set-config 1 cc=1
+usb-hid: configured — hid polling ep=0x81
+usb-hid: report#0 mod=00 keys=04 00 00 00 00 00 char=a
+usb-hid: report#1 mod=00 keys=05 00 00 00 00 00 char=b
