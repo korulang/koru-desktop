@@ -1,0 +1,22 @@
+qemu-system-x86_64: warning: netdev n0 has no peer
+qemu-system-x86_64: warning: nic virtio-net-pci.0 has no peer
+[?7l
+[0mSeaBIOS (version rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org)
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+06FD1D60+06F31D60 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...
+                                                                               
+Booting from ROM..vpci-modern: virtio dev 1af4:1000
+vpci-modern: caps=0
+vpci-modern: REFUSE â
+ no virtio caps (legacy-only device)
+[    0.102782] ERR:  [libukbus_pci] <pci_bus.c @  103> 
+PCI 00:03.00: Failed to initialize device driver
+Powered by
+o.   .o       _ _               __ _
+Oo   Oo  ___ (_) | __ __  __ _ ' _) :_
+oO   oO ' _ `| | |/ /  _)' _` | |_|  _)
+oOo oOO| | | | |   (| | | (_) |  _) :_
+ OoOoO ._, ._:_:_,\_._,  .__,_:_, \___)
+          Ijiraq 0.21.0~3fdffba8-custom
+vpci-modern: guest up
+vpci-modern: probe found=1

@@ -1,0 +1,3 @@
+$(eval $(call addlib,appusbxhci))
+
+APPUSBXHCI_SRCS-y += $(APPUSBXHCI_BASE)/main.c

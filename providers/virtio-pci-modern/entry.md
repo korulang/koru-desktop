@@ -7,12 +7,12 @@ donor: unikraft-fork
 needs: [pci-enumeration]
 accept: accept.sh — probe negotiates VERSION_1 on a virtio-1.0-only device
 tier: qemu
-status: open
+status: landed
 home: this-repo
 donor: unikraft-fork
-evidence: V
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: M
+license: BSD-3-Clause (app/ is original work)
+provenance: original work against virtio 1.0 spec §4.1.4-4.1.5; PCI config/CF8-CFC helper pattern derived from same-author usb-xhci driver a075553 (BSD-3-Clause); no foreign lifts
 ---
 
 # virtio-pci-modern
