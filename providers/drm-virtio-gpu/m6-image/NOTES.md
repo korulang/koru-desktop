@@ -43,6 +43,17 @@ embedded as EINITRD, app-elfloader + libelf libraries.
    Serial logs contain NUL bytes — use `strings`, not `grep`.
 
 ## Status
-M1 done. M2 (kmscube/modetest in image) next: extend rootfs with
-Debian libdrm + kmscube + glibc + ld.so (dynamic exec path is the
-untested part — static-PIE proven, dynamic ELF loading not yet).
+M1 done. M2 done: `modetest` (unmodified Debian binary) runs —
+glibc 2.41 + ld-linux + libdrm 2.4.124 dynamically loaded, reaches
+`drmGetDevices2()` which returns -2 (ENOENT) — no /dev/dri/card0 in
+this rootfs by design; the device is korukms' job upstream.
+evidence/m2-modetest-serial.log.
+
+Rootfs layout that worked: modetest in /bin (PATH=/bin), ld-linux in
+/lib and /lib64, libc/libm/libdrm flat in /lib and /usr/lib —
+LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib covers the flat dirs.
+
+Gotchas on the M2 path: (a) program must be in /bin or named in PATH;
+/usr/bin is NOT searched. (b) trixie libdrm needs GLIBC_2.38 —
+bookworm libc6 2.36 fails at load. (c) trixie libc6 2.41 deb places
+files under usr/lib + usr/lib64, not lib — check layout per release.

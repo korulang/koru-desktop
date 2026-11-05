@@ -1,0 +1,15 @@
+# m6-linuxu image inputs — exact pins
+# Kraftfile `stable` resolves to tarballs (no git SHAs in .unikraft tree);
+# pinned by resolved version string + artifact sha256 where recoverable.
+
+unikraft: Ijiraq 0.21.0            # unikraft: stable
+app-elfloader: stable@Ijiraq-0.21  # github.com/unikraft/app-elfloader.git
+lib-libelf: stable@Ijiraq-0.21     # github.com/unikraft/lib-libelf.git
+
+# Debian userland (downloaded from ftp.debian.org pool, sha256 of .deb):
+libc6_2.41-12+deb13u4_amd64.deb    sha256=967aa62605721081c3eb2a17650611a792aa802d76a6511d1840242623d204c9
+libdrm2_2.4.124-2_amd64.deb      sha256=fe2276901c7cd7b8079de63072d37fe1cbeb4eb001a3bc1f1d662ad89aa0890e
+libdrm-tests_2.4.124-2_amd64.deb sha256=387a1206956ea7ccb8562b0f8d060c4e0224a34b1cb8dc630ec1f446775d5be6
+
+# NOTE: libdrm-tests/libdrm2 are trixie builds (need GLIBC_2.38+); the
+# bookworm libc6 2.36 fails 'GLIBC_2.38 not found' — measured, not assumed.
