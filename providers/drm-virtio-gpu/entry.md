@@ -7,7 +7,7 @@ donor: unikraft-fork
 needs: [pci-enumeration, virtio-pci-modern]
 accept: accept.sh — unmodified libdrm/modetest or kmscube on /dev/dri/card0
 tier: qemu
-status: claimed
+status: landed
 home: this-repo
 donor: unikraft-fork
 evidence: M
