@@ -51,3 +51,4 @@ and — if it demands a `koruos/*` iface that doesn't exist upstream — a
 provider-row ask filed to koru-os, not invented locally.
 | blk-nvme | koruos/blk.nvme | landed | QEMU NVMe driver authored in-repo (probe→BAR0→admin/IO queues→read/write/flush); accept.sh: serial 'korudesktop' identified, host-planted pattern read, guest pattern verified by host dd/cmp, wrong serial refused |
 | virtio-input | koruos/input.virtio | landed | modern-transport virtio-input driver authored in-repo (cap-walk→VERSION_1→split vrings→eventq decode); accept.sh: keyboard+tablet named, QMP-injected keys/abs decoded on serial, absent case refused |
+| fs-9p | koruos/fs.9p | landed | compose: in-tree uk9p+9pfs+virtio_9p compose the mount path (no driver authored); accept.sh: host share mounted '9pfs', planted bytes verified, guest write host-verified on share, wrong tag refused |

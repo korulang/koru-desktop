@@ -7,11 +7,11 @@ donor: none — composition if vfscore 9p mount exists; minimal glue otherwise
 needs: [pci-enumeration]
 accept: accept.sh — guest mounts host share, reads+writes host-verified files
 tier: qemu
-status: open
+status: landed
 home: this-repo
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: V
+license: BSD-3-Clause
+provenance: app/ is orchestration-only against in-tree libs (uk9p + 9pfs + virtio_9p + vfscore + ramfs, unikraft 0.21 fork 3fdffba8, BSD-3-Clause); no derived code
 ---
 
 # fs-9p

@@ -1,0 +1,3 @@
+$(eval $(call addlib,appfs9p))
+
+APPFS9P_SRCS-y += $(APPFS9P_BASE)/main.c

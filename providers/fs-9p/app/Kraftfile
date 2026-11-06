@@ -1,0 +1,22 @@
+spec: v0.6
+
+name: fs9p
+
+unikraft:
+  source: /Users/larsde/src/unikraft
+  kconfig:
+    CONFIG_UKBUS: 'y'
+    CONFIG_LIBUKBUS_PCI: 'y'
+    CONFIG_LIBUKBUS_PCI_ECAM: 'y'
+    CONFIG_LIBUKALLOC: 'y'
+    CONFIG_LIBUKDEBUG: 'y'
+    CONFIG_LIBUKPAGING: 'y'
+    CONFIG_LIBVFSCORE: 'y'
+    CONFIG_LIBRAMFS: 'y'
+    CONFIG_LIBUK9P: 'y'
+    CONFIG_LIB9PFS: 'y'
+    CONFIG_LIBVIRTIO_9P: 'y'
+    CONFIG_LIBVIRTIO_PCI: 'y'
+
+targets:
+- qemu/x86_64
