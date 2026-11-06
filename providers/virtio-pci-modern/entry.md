@@ -43,3 +43,11 @@ cap path only when caps exist.
 Alternative donors: KolibriOS has no virtio; Linux `virtio_pci_modern`
 is the reference ABI if a `silo` lane is ever chosen. Upstreaming to
 unikraft/unikraft is plausible long-term — the transport is generic.
+
+## Decision record
+
+- **Chosen:** new capability-list transport (common/notify/isr/device
+  cfg + PCI caps) per virtio 1.0 spec §4.1.4-4.1.5.
+- **Alternative not taken:** patching the legacy I/O-port path —
+  modern-only devices have no legacy BAR; the transport had to be
+  written, not patched.

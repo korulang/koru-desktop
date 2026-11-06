@@ -58,3 +58,12 @@ the same script against `-vga std` must fail to find the driver.
 - Alternative: reuse/extend `korukms` — it already speaks the DRM
   personality over bochs-display; a virtio-gpu scanout engine could
   plug the same ioctl surface. `home:` may end up `upstream-koruos`.
+
+## Decision record
+
+- **Chosen:** native virtio-gpu driver (virtio 1.0 + virtio-gpu specs)
+  plus upstream-lane korukms provider for the `kms.*` ioctl surface.
+- **Alternative not taken:** extending the bochs-display korukms seam —
+  virtio-gpu is a virtio-1.0 device with cap-list transport and
+  different resource model; new driver warranted, korukms ioctl
+  surface reused conceptually.

@@ -39,3 +39,10 @@ NVMe is native PCIe — no virtio transport needed, but it does need
 MSI-X vectors (`irq-msix` landed) and PRP/SGL command rings. Real-hw
 NVMe drives are a different firmware/queue-depth world; `tier:` stays
 qemu until a hw rung is designed.
+
+## Decision record
+
+- **Chosen:** `donor-c` native NVMe driver (NVMe 1.4 spec + QEMU nvme
+  device model, vendor 0x1b36/0x0010).
+- **Alternative not taken:** extending virtio-blk — QEMU `nvme` is
+  native PCIe, not virtio; no virtio path exists to extend.

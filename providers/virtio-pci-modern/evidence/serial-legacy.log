@@ -9,7 +9,7 @@ Booting from ROM..vpci-modern: virtio dev 1af4:1000
 vpci-modern: caps=0
 vpci-modern: REFUSE â
  no virtio caps (legacy-only device)
-[    0.102782] ERR:  [libukbus_pci] <pci_bus.c @  103> 
+[    0.102735] ERR:  [libukbus_pci] <pci_bus.c @  103> 
 PCI 00:03.00: Failed to initialize device driver
 Powered by
 o.   .o       _ _               __ _

@@ -38,3 +38,9 @@ ext2 and host `e2fsck -fn` is clean (DoD-1 oracle shape on USB media).
 - Real-hw flash quirks (read-only switches, eject semantics, spin-up
   delays) are tier:hw concerns — keep the transport layer honest about
   sense/phase errors so they surface later, not silently.
+
+## Decision record
+
+- **Chosen:** BOT (Bulk-Only Transport) — QEMU `usb-storage` is BOT.
+- **Alternative not taken:** UASP (`usb-uas` device) — faster protocol,
+  later pass; BOT first because it's what the emulated device speaks.

@@ -43,3 +43,13 @@ that writes SLP_TYP and hangs without QEMU suspending fails.
   (koru-os already has the mb2/OVMF arms), or reclassify the slot.
 - Real laptops suspend constantly — this is a `tier: hw` requirement
   eventually even if QEMU can't test it.
+
+## Decision record
+
+- **Chosen:** bounded FACS attempt — write a guest resume stub, patch the
+  FACS firmware waking vector, measure whether QEMU honors it under
+  `-kernel`. Time-boxed: if the wake vector isn't honored, reclassify
+  `tier: hw` with the measurement recorded.
+- **Alternative not taken:** reclassify `tier: hw` immediately (suspend
+  entry already proven; the open question is only the resume vector),
+  and the OVMF/firmware-boot path — a different project, not this slot.

@@ -44,3 +44,10 @@ energy check, not just "opened successfully."
   fallback device if HDA stalls — entry can note a lane decision.
 - tier:hw rung: real laptops are mostly HDA-compatible (Intel/Realtek
   codecs) — the codec layer is where hw variance lives.
+
+## Decision record
+
+- **Chosen:** Intel HDA (`intel-hda`/`hda-duplex`) — the real desktop
+  codec path; hda.c authored from the HDA spec.
+- **Alternative not taken:** AC97 (`-device AC97`) — simpler fallback
+  device, documented in entry if HDA stalls on real hardware.

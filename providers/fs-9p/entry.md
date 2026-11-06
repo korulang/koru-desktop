@@ -42,3 +42,10 @@ Falsifiable: wrong mount_tag / absent fsdev → mount fails → script fails.
   exists in-tree.
 - Security model `none` is correct for QEMU user-net dev loops;
   `mapped-xattr`/`none` decision recorded at claim.
+
+## Decision record
+
+- **Chosen:** `compose` lane — in-tree uk9p + 9pfs + virtio_9p +
+  vfscore compose the mount path; zero driver code authored.
+- **Alternative not taken:** `donor-c` glue layer — only needed if
+  vfscore lacked a 9p mount path; measured: it exists.

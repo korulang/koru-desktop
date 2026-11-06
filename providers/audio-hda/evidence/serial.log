@@ -15,4 +15,4 @@ oOo oOO| | | | |   (| | | (_) |  _) :_
           Ijiraq 0.21.0~3fdffba8-custom
 audio-hda: guest up
 audio-hda: probe hit=1
-hda: replay-vendor rc=0 r=1af40012 corbrp=6 rirbwp=3 corbctl=03 rirbctl=03hda: subnode scan r0=00000000 r1=00020002 r2=00000000hda: afg nid=1 nodes start=2 cnt=2hda: conv=2 pin=3hda: stream run sd_off=100 cbl=192000 ctl=100006 lpib=0hda: pcm[0]=-20000 pcm[5000]=20000hda: lpib=30888
+hda: replay-vendor rc=0 r=1af40012 corbrp=6 rirbwp=3 corbctl=03 rirbctl=03hda: subnode scan r0=00000000 r1=00020002 r2=00000000hda: afg nid=1 nodes start=2 cnt=2hda: conv=2 pin=3hda: stream run sd_off=100 cbl=192000 ctl=100006 lpib=0hda: pcm[0]=-20000 pcm[5000]=20000hda: lpib=30628

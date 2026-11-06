@@ -36,3 +36,12 @@ host-side virglrenderer availability — a build-host dependency worth
 pinning in `origins.lock` notes when claimed. Venus (Vulkan) is a later
 slot of its own if ever demanded; not seeded — the catalog grows on
 demand (SCENE law 5).
+
+## Decision record
+
+- **Chosen:** QEMU source-build spike — `--enable-virglrenderer` against
+  the brew-installed virglrenderer 1.3.0 (no time budget constraint;
+  push as far as this host allows).
+- **Alternative not taken:** host-blocked defer to a Linux build host —
+  remains the fallback if the source build can't produce a working
+  virgl consumer on macOS (EGL/surfaceless is the likely wall).

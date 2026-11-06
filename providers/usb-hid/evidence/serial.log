@@ -14,3 +14,4 @@ usb-hid: set-config 1 cc=1
 usb-hid: configured — hid polling ep=0x81
 usb-hid: report#0 mod=00 keys=04 00 00 00 00 00 char=a
 usb-hid: report#1 mod=00 keys=05 00 00 00 00 00 char=b
+qemu-system-x86_64: terminating on signal 15

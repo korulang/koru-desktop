@@ -42,3 +42,11 @@ falsifier = devices absent → no events → fail.
   a desktop; claim-time choice between mouse (relative) and tablet.
 - Prior art: virtio 1.0 spec §5.10 (input); QEMU `hw/input/virtio-input.c`
   is the device-model reference (read-only).
+
+## Decision record
+
+- **Chosen:** `donor-c` new driver (cap-walk → VERSION_1 → split vrings →
+  eventq decode); devices keyboard + tablet — tablet is absolute-pointer,
+  the desktop-right QEMU device.
+- **Alternative not taken:** extending the usb-hid path (different
+  transport + report format), virtio-mouse relative-pointer.

@@ -44,3 +44,10 @@ same script must fail.
   this slot is the *image composition*, which is desktop-repo work.
 - Wi-Fi (`net-wifi`) is a separate tier:hw slot — this one is ethernet
   virtio only.
+
+## Decision record
+
+- **Chosen:** `compose` lane — virtio-net + lib-lwip + posix-socket
+  composed into a bootable image; no new driver code.
+- **Alternative not taken:** `donor-c` TCP/IP stack authorship —
+  measured: composition sufficed.

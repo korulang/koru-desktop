@@ -38,3 +38,4 @@ virtio-input: ev type=1 code=48 val=1 b=down
 virtio-input: ev type=0 code=0 val=0
 virtio-input: ev type=1 code=48 val=0 b=up
 virtio-input: ev type=0 code=0 val=0
+qemu-system-x86_64: terminating on signal 15

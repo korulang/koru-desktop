@@ -52,3 +52,10 @@ slots, not crash.
   facts, never derive from it. `suhteevah/xhci-nostd` (Apache-2.0) is
   the clean lift candidate. Full census: `design.md` +
   `evidence/prior-art-census.md`.
+
+## Decision record
+
+- **Chosen:** `donor-c` spec-authored driver (xHCI 1.0/1.2 spec + QEMU
+  hcd-xhci model); xhci-nostd (Apache-2.0) read for orientation only.
+- **Alternative not taken:** `silo` foreign driver — NONOS xhci capsule
+  is AGPL-3.0+ (excluded per diligence clause); no clean donor existed.

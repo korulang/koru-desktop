@@ -57,3 +57,17 @@
   reference or fixed per QEMU machine — but parse-first is the honest path.
 - pm1cnt=0x604 (q35) confirmed working — suspend half proven; only the
   FACS wake-vector wiring is missing for the resume test.
+
+## DEP-CHAIN WALL (as of ff9ecdf+)
+- CONFIG_LIBUKPAGING gate is real: uk_paging_pt_get_active +
+  uk_paging_page_kmap need it; enabling cascades LIBUKFALLOC (uk/falloc.h)
+  -> LIBUKFALLOCBUDDY (uk/fallocbuddy.h, symbol is ONE word, not
+  LIBUKFALLOC_BUDDY). Config set but libukfallocbuddy still not pulled
+  into the build — the generated config's dep wiring needs the kconfig
+  tree, not raw symbol edits.
+- ROUTE AROUND the dep chain: skip kmap entirely — unikraft's own
+  bootinfo maps SOME phys ranges; alternatively read FACS addr from
+  QEMU-side (fs walker) or use ukplat_pt_walk on the existing page
+  table without enabling the full paging lib. OR: map low mem by
+  writing the PTE directly via uk_pagetable (a lighter API surface).
+- DECISION STANDS: wake-vector wiring is the attempt, not tier:hw.

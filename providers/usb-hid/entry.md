@@ -44,3 +44,10 @@ usb-kbd` absent → no events, script fails.
   desktop than `usb-mouse` (relative) — claim-time choice.
 - Touchpads are I2C/HID-over-I2C or USB HID — the `tier: hw` rung will
   meet them; keep the report parser device-agnostic.
+
+## Decision record
+
+- **Chosen:** boot-protocol 8-byte input reports first; usb-tablet
+  (absolute pointer) over usb-mouse (relative).
+- **Alternative not taken:** report protocol — needed for
+  consumer-control keys (volume, brightness) later; idiomatic pass.
