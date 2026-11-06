@@ -7,11 +7,11 @@ donor: unikraft-fork
 needs: [pci-enumeration, virtio-pci-modern, irq-msix]
 accept: accept.sh — virtio-keyboard/tablet events reach evdev; host injects and verifies
 tier: qemu
-status: open
+status: landed
 home: this-repo
-evidence: D
-license: none-yet
-provenance: none-yet — record source+SHA+license before first derived line
+evidence: V
+license: BSD-3-Clause
+provenance: app/ original work; PCI cap-walk + cfg helpers derived from this repo's providers/virtio-pci-modern/app/main.c (same author, BSD-3-Clause); vring/input protocol from virtio 1.0 spec §2.7/§5.10; no foreign lifts
 ---
 
 # virtio-input

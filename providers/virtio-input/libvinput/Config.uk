@@ -1,0 +1,6 @@
+config LIBVIRTIO_INPUT
+	bool "virtio-input device support (provider shim)"
+	default n
+	select VIRTIO_DEVICE
+	select LIBVIRTIO_BUS
+	select LIBVIRTIO_PCI

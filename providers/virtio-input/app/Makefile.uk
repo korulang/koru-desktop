@@ -1,0 +1,3 @@
+$(eval $(call addlib,appvinput))
+
+APPVINPUT_SRCS-y += $(APPVINPUT_BASE)/main.c
