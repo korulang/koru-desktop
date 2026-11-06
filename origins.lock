@@ -88,6 +88,61 @@
       },
       "target": "donors/fork-lwip",
       "role": "net-virtio-lwip provider \u2014 upstream lwIP core fetched by lib-lwip Makefile.uk at build time (branch UNIKRAFT-2_1_x)"
+    },
+    {
+      "name": "app-elfloader",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/app-elfloader.git",
+        "revision": "6ecbcd08d85b4688112a3b275a9c8446cf59e25d"
+      },
+      "target": "providers/drm-virtio-gpu/m6-image (Kraftfile.hello libraries.app-elfloader)",
+      "role": "Linux ELF userspace loader for m6-image \u2014 stable branch pinned 2026-11-05"
+    },
+    {
+      "name": "lib-libelf",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/unikraft/lib-libelf.git",
+        "revision": "c03d4ceb22a2b9e9799238f9c277a14284d313ad"
+      },
+      "target": "providers/drm-virtio-gpu/m6-image (Kraftfile.hello libraries.libelf)",
+      "role": "ELF parsing for app-elfloader \u2014 stable branch pinned 2026-11-05"
+    },
+    {
+      "name": "debian-libc6-deb",
+      "source": {
+        "kind": "file",
+        "scheme": "http",
+        "origin": "ftp.debian.org pool \u2014 libc6_2.41-12+deb13u4_amd64.deb",
+        "revision": "sha256:967aa62605721081c3eb2a17650611a792aa802d76a6511d1840242623d204c9"
+      },
+      "target": "providers/drm-virtio-gpu/m6-image userland glibc",
+      "role": "Debian trixie glibc .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
+    },
+    {
+      "name": "debian-libdrm2-deb",
+      "source": {
+        "kind": "file",
+        "scheme": "http",
+        "origin": "ftp.debian.org pool \u2014 libdrm2_2.4.124-2_amd64.deb",
+        "revision": "sha256:fe2276901c7cd7b8079de63072d37fe1cbeb4eb001a3bc1f1d662ad89aa0890e"
+      },
+      "target": "providers/drm-virtio-gpu/m6-image userland libdrm",
+      "role": "Debian libdrm2 .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
+    },
+    {
+      "name": "debian-libdrm-tests-deb",
+      "source": {
+        "kind": "file",
+        "scheme": "http",
+        "origin": "ftp.debian.org pool \u2014 libdrm-tests_2.4.124-2_amd64.deb",
+        "revision": "sha256:387a1206956ea7ccb8562b0f8d060c4e0224a34b1cb8dc630ec1f446775d5be6"
+      },
+      "target": "providers/drm-virtio-gpu/m6-image userland libdrm-tests",
+      "role": "Debian libdrm-tests .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
     }
   ]
 }
