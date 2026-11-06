@@ -49,11 +49,25 @@ sys_error_handler_except). Two stacked findings:
    kernel stack. Worth a koru-os fix + regression regardless of the
    compositor outcome.
 
-## Next
+## Next walls (measured, in order)
 
-Boot Hyprland under a syscall-trace (uk_syscall6 shim already prints
-ENOSYS at ERR) to name the faulting syscall; the stack-overflow on
-delivery is a separate upstream fix in koru-os-cypoe.
+1. fault-delivery kernel overflow — FIXED
+   (unikraft-0.21-signal-deliver-terminate.patch on koru-os-cypoe
+   fix-signal-deliver-terminate: err_panic UK_CRASH -> uk_sigact_term)
+2. thread-stack ~1.1MB VMA guard — FIXED
+   (STACK_SIZE_PAGE_ORDER 4->10 = 4MB; the crash VMA was a worker-
+   thread stack, NOT the elfloader main stack)
+3. contiguous 16MB VRAM palloc — FIXED
+   (VGPU_VRAM_SIZE 16->4 MiB in the workspace korukms; after the ~470MB
+   initrd extract the buddy has no order-12 block; 4MB covers the
+   640x480x4 mode with headroom)
+4. --i-am-really-stupid required (privileges check), m9-recipe flag
+5. CURRENT WALL: Hyprland reaches renderer init — libseat opens
+   /dev/dri/card0 via sysfs enumerate, libinput grabs event0, GBM/EGL
+   (llvmpipe) initializes, shaders compile, framebuffers create —
+   then a userspace fault on the render path recurses into
+   vmem_vma_find (rip 0x1511f0) and crashes the kernel. A second
+   fault-adjacent bug, this one in the VMA find walk.
 
 ## Evidence
 
