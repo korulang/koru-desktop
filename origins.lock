@@ -10,7 +10,7 @@
         "revision": "c7c3474347763b1a21d0bff94816fa5da6412ef3"
       },
       "target": "platform/koru-os",
-      "role": "platform contract \u2014 consumed read-mostly; provider-row asks go upstream"
+      "role": "platform contract — consumed read-mostly; provider-row asks go upstream"
     },
     {
       "name": "koru",
@@ -21,7 +21,7 @@
         "revision": "91014797685fd4ffe567b4c59cfb577bb41f66f7"
       },
       "target": "toolchain/koru",
-      "role": "koruc compiler \u2014 builds all .k/.kz programs"
+      "role": "koruc compiler — builds all .k/.kz programs"
     },
     {
       "name": "koru-libs",
@@ -32,7 +32,7 @@
         "revision": "0fcacb97c1e87c036fb260984a1c9788ae27c671"
       },
       "target": "libs/koru-libs",
-      "role": "packages incl. unikraft/* lifts \u2014 consumed via koru.json paths"
+      "role": "packages incl. unikraft/* lifts — consumed via koru.json paths"
     },
     {
       "name": "unikraft-stable",
@@ -43,7 +43,7 @@
         "revision": "7351f8b563c9e6773da9fdd5bacde6ac91e32112"
       },
       "target": "donors/unikraft-stable",
-      "role": "L2 arm donor \u2014 kraft stable channel; the arm that boots Hyprland (koru-os origins.lock pin)"
+      "role": "L2 arm donor — kraft stable channel; the arm that boots Hyprland (koru-os origins.lock pin)"
     },
     {
       "name": "unikraft-staging",
@@ -54,7 +54,7 @@
         "revision": "3fdffba8d7a938b56fdf628963061bba9b2ff54f"
       },
       "target": "donors/unikraft-staging",
-      "role": "staging donor \u2014 the tree koru-libs unikraft/* lifts were built against (~/src/unikraft, COCPORN fork remote)"
+      "role": "staging donor — the tree koru-libs unikraft/* lifts were built against (~/src/unikraft, COCPORN fork remote)"
     },
     {
       "name": "lib-lwip",
@@ -65,7 +65,7 @@
         "revision": "ec55ae17618feeb57c8c10109bcf5c42723e8e95"
       },
       "target": "donors/lib-lwip",
-      "role": "net-virtio-lwip provider \u2014 POSIX socket API over lwIP; build-time fetch of fork-lwip UNIKRAFT-2_1_x pinned below"
+      "role": "net-virtio-lwip provider — POSIX socket API over lwIP; build-time fetch of fork-lwip UNIKRAFT-2_1_x pinned below"
     },
     {
       "name": "oshun",
@@ -76,7 +76,7 @@
         "revision": "1adc1171775d26102ce80f05c77ca873335f3001"
       },
       "target": "surface/oshun",
-      "role": "host surface \u2014 the acceptance consumer; gains host/index.<platform>.kz parts downstream"
+      "role": "host surface — the acceptance consumer; gains host/index.<platform>.kz parts downstream"
     },
     {
       "name": "fork-lwip",
@@ -87,7 +87,7 @@
         "revision": "bef26c44236a078d4352e76392ef16f019bea501"
       },
       "target": "donors/fork-lwip",
-      "role": "net-virtio-lwip provider \u2014 upstream lwIP core fetched by lib-lwip Makefile.uk at build time (branch UNIKRAFT-2_1_x)"
+      "role": "net-virtio-lwip provider — upstream lwIP core fetched by lib-lwip Makefile.uk at build time (branch UNIKRAFT-2_1_x)"
     },
     {
       "name": "app-elfloader",
@@ -98,7 +98,7 @@
         "revision": "6ecbcd08d85b4688112a3b275a9c8446cf59e25d"
       },
       "target": "providers/drm-virtio-gpu/m6-image (Kraftfile.hello libraries.app-elfloader)",
-      "role": "Linux ELF userspace loader for m6-image \u2014 stable branch pinned 2026-11-05"
+      "role": "Linux ELF userspace loader for m6-image — stable branch pinned 2026-11-05"
     },
     {
       "name": "lib-libelf",
@@ -109,40 +109,62 @@
         "revision": "c03d4ceb22a2b9e9799238f9c277a14284d313ad"
       },
       "target": "providers/drm-virtio-gpu/m6-image (Kraftfile.hello libraries.libelf)",
-      "role": "ELF parsing for app-elfloader \u2014 stable branch pinned 2026-11-05"
+      "role": "ELF parsing for app-elfloader — stable branch pinned 2026-11-05"
     },
     {
       "name": "debian-libc6-deb",
       "source": {
         "kind": "file",
         "scheme": "http",
-        "origin": "ftp.debian.org pool \u2014 libc6_2.41-12+deb13u4_amd64.deb",
+        "origin": "ftp.debian.org pool — libc6_2.41-12+deb13u4_amd64.deb",
         "revision": "sha256:967aa62605721081c3eb2a17650611a792aa802d76a6511d1840242623d204c9"
       },
       "target": "providers/drm-virtio-gpu/m6-image userland glibc",
-      "role": "Debian trixie glibc .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
+      "role": "Debian trixie glibc .deb — sha256-pinned artifact (m6-image/origins.lock)"
     },
     {
       "name": "debian-libdrm2-deb",
       "source": {
         "kind": "file",
         "scheme": "http",
-        "origin": "ftp.debian.org pool \u2014 libdrm2_2.4.124-2_amd64.deb",
+        "origin": "ftp.debian.org pool — libdrm2_2.4.124-2_amd64.deb",
         "revision": "sha256:fe2276901c7cd7b8079de63072d37fe1cbeb4eb001a3bc1f1d662ad89aa0890e"
       },
       "target": "providers/drm-virtio-gpu/m6-image userland libdrm",
-      "role": "Debian libdrm2 .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
+      "role": "Debian libdrm2 .deb — sha256-pinned artifact (m6-image/origins.lock)"
     },
     {
       "name": "debian-libdrm-tests-deb",
       "source": {
         "kind": "file",
         "scheme": "http",
-        "origin": "ftp.debian.org pool \u2014 libdrm-tests_2.4.124-2_amd64.deb",
+        "origin": "ftp.debian.org pool — libdrm-tests_2.4.124-2_amd64.deb",
         "revision": "sha256:387a1206956ea7ccb8562b0f8d060c4e0224a34b1cb8dc630ec1f446775d5be6"
       },
       "target": "providers/drm-virtio-gpu/m6-image userland libdrm-tests",
-      "role": "Debian libdrm-tests .deb \u2014 sha256-pinned artifact (m6-image/origins.lock)"
+      "role": "Debian libdrm-tests .deb — sha256-pinned artifact (m6-image/origins.lock)"
+    },
+    {
+      "name": "qemu-v11.0.3",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://gitlab.com/qemu-project/qemu.git",
+        "revision": "aeec49e8170de7846f476124602cf7acd400c3df"
+      },
+      "target": "providers/gpu-virgl-3d/scratch/qemu",
+      "role": "virgl build spike — source build with --enable-virglrenderer (tag v11.0.3)"
+    },
+    {
+      "name": "libepoxy-v1.5.10",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/anholt/libepoxy.git",
+        "revision": "c84bc9459357a40e46e2fec0408d04fbdde2c973"
+      },
+      "target": "/tmp/epoxy-src (scratch, gpu-virgl-3d spike)",
+      "role": "EGL-enabled epoxy for QEMU virgl build spike — 3 darwin patches (PLATFORM_HAS_EGL, EGL_LIB, GLES dylib names)"
     }
   ]
 }
