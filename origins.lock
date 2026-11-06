@@ -88,6 +88,28 @@
       },
       "target": "donors/fork-lwip",
       "role": "net-virtio-lwip provider \u2014 upstream lwIP core fetched by lib-lwip Makefile.uk at build time (branch UNIKRAFT-2_1_x)"
+    },
+    {
+      "name": "qemu-v11.0.3",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://gitlab.com/qemu-project/qemu.git",
+        "revision": "aeec49e8170de7846f476124602cf7acd400c3df"
+      },
+      "target": "providers/gpu-virgl-3d/scratch/qemu",
+      "role": "virgl build spike \u2014 source build with --enable-virglrenderer (tag v11.0.3)"
+    },
+    {
+      "name": "libepoxy-v1.5.10",
+      "source": {
+        "kind": "vcs",
+        "scheme": "git",
+        "origin": "https://github.com/anholt/libepoxy.git",
+        "revision": "c84bc9459357a40e46e2fec0408d04fbdde2c973"
+      },
+      "target": "/tmp/epoxy-src (scratch, gpu-virgl-3d spike)",
+      "role": "EGL-enabled epoxy for QEMU virgl build spike \u2014 3 darwin patches (PLATFORM_HAS_EGL, EGL_LIB, GLES dylib names)"
     }
   ]
 }
