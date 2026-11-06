@@ -28,9 +28,12 @@ Branch in worktree `~/src/koru-os-korukms`, parented on your pin
 host screendump oracle green (bind→paint→scanout→640x480 bands).
 Two real QEMU-model fixes it drove: ATTACH_BACKING must emit
 per-phys-run entries; dma_map refuses ISA-hole-spanning pools.
-`drm_linux.c` untouched, bochs seam preserved. M2 (`modetest` on
-`/dev/dri/card0`) is now feasible — the linuxu image builds on the
-Mac (m6-image landed: elfloader + Debian userland, no Windows box).
+`drm_linux.c` untouched, bochs seam preserved. **M2 green** —
+unmodified `modetest` on `/dev/dri/card0` + painted modeset through
+the provider (commits `3faf2c9`/`8cdfa21`, m2-join evidence in the
+worktree). The linuxu image builds on the Mac (m6-image landed:
+elfloader + Debian userland, deps sha256/SHA-pinned in
+`origins.lock` — provenance audit closed).
 
 ## Overlap flag
 
