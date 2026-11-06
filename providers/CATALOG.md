@@ -22,13 +22,15 @@ upstream-koruos` · Tiers: `qemu | hw`
 | usb-storage | koruos/blk.usb | unikraft/* | donor-c | usb-xhci | qemu | landed | D |
 | audio-hda | koruos/audio.pcm | unikraft/* | donor-c | pci-enumeration | qemu | landed | D |
 | acpi-s3 | koruos/power.s3 | unikraft/* | donor-c | — | qemu | open | D |
+| virtio-input | koruos/input.virtio | unikraft/* | donor-c | pci-enumeration, virtio-pci-modern, irq-msix | qemu | open | D |
+| fs-9p | koruos/fs.9p | unikraft/* | compose | pci-enumeration | qemu | open | D |
 | net-wifi | koruos/net.wifi | — | donor-c | pci-enumeration | **hw** | open | D |
 | bluetooth | koruos/net.bluetooth | — | donor-c | pci-enumeration | **hw** | open | D |
 
 ## Unblocked now (all needs landed/waived)
 
-`virtio-pci-modern`, `net-virtio-lwip`, `blk-nvme`, `usb-xhci`,
-`audio-hda`, `acpi-s3`, `net-wifi`, `bluetooth`
+`acpi-s3`, `gpu-virgl-3d` (drm-virtio-gpu landed), `virtio-input`,
+`fs-9p` — plus `net-wifi`/`bluetooth` when tier:hw hardware exists
 
 ## Critical path
 
