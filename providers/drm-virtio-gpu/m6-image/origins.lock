@@ -1,12 +1,20 @@
 # m6-linuxu image inputs — exact pins
-# Kraftfile `stable` resolves to tarballs (no git SHAs in .unikraft tree);
-# pinned by resolved version string + artifact sha256 where recoverable.
+# `stable` is a moving ref; the SHAs below are what stable resolved to at
+# audit time (verified via git ls-remote on 2026-11-05). A future
+# `stable` drift does not invalidate these recorded resolutions.
 
-unikraft: Ijiraq 0.21.0            # unikraft: stable
-app-elfloader: stable@Ijiraq-0.21  # github.com/unikraft/app-elfloader.git
-lib-libelf: stable@Ijiraq-0.21     # github.com/unikraft/lib-libelf.git
+## Git deps (kraft `libraries:` + unikraft core)
 
-# Debian userland (downloaded from ftp.debian.org pool, sha256 of .deb):
+unikraft:       7351f8b563c9e6773da9fdd5bacde6ac91e32112
+  # github.com/unikraft/unikraft.git refs/heads/stable
+app-elfloader:  6ecbcd08d85b4688112a3b275a9c8446cf59e25d
+  # github.com/unikraft/app-elfloader.git refs/heads/stable
+lib-libelf:     c03d4ceb22a2b9e9799238f9c277a14284d313ad
+  # github.com/unikraft/lib-libelf.git refs/heads/stable
+
+## Debian userland (ftp.debian.org pool, sha256 of .deb — pool URLs move
+## between mirrors, the digest is the identity)
+
 libc6_2.41-12+deb13u4_amd64.deb    sha256=967aa62605721081c3eb2a17650611a792aa802d76a6511d1840242623d204c9
 libdrm2_2.4.124-2_amd64.deb      sha256=fe2276901c7cd7b8079de63072d37fe1cbeb4eb001a3bc1f1d662ad89aa0890e
 libdrm-tests_2.4.124-2_amd64.deb sha256=387a1206956ea7ccb8562b0f8d060c4e0224a34b1cb8dc630ec1f446775d5be6
