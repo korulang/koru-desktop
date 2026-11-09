@@ -5,3 +5,18 @@
 build/
 evidence/**/serial.log.bak
 .fleet/
+
+# session workspaces — vendored trees, disk images, build outputs (multi-GB)
+workspaces/
+providers/gpu-virgl-3d/scratch/
+providers/virtio-pci-modern/app/.config.*
+session/m5-m9port/inputs/
+session/m5-m9port/kernel/
+session/m5-m9port/kernel-src/
+session/m5-m9port/apt-snap/
+session/m5-m9port/recipe/
+session/m5-m9port/runs/
+session/m5-m9port/m9-hyprland/
+session/m5-m9port/tools/
+session/m6-i915/linux/
+session/m6-i915/libgfxinit/

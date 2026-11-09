@@ -1,0 +1,18 @@
+--- a/lib/ukvmem/vmem.c
++++ b/lib/ukvmem/vmem.c
+@@ -118,6 +118,15 @@
+ 	uk_list_for_each_entry(vma, &vas->vma_list, vma_list) {
++		/* m4 instrument: a vma_list link pointing outside the low
++		 * canonical half means the node (or its link fields) was
++		 * corrupted — e.g., a freed VMA whose memory was reused, or
++		 * a wild write. Print and bail instead of dereferencing. */
++		if (unlikely((unsigned long)vma >= 0x0000800000000000UL ||
++			     ((unsigned long)vma & 0xfUL))) {
++			uk_pr_err("ukvmem: corrupt vma_list node 0x%lx at find "
++				  "0x%" __PRIvaddr "-0x%" __PRIvaddr "\n",
++				  (unsigned long)vma, vstart, vend);
++			return __NULL;
++		}
+ 		if ((vend > vma->start) && (vstart < vma->end))
+ 			return vma;
+ 	}

@@ -1,0 +1,228 @@
+diff --git a/lib/ukvmem/include/uk/vmem.h b/lib/ukvmem/include/uk/vmem.h
+index e8220490..56c7a32f 100644
+--- a/lib/ukvmem/include/uk/vmem.h
++++ b/lib/ukvmem/include/uk/vmem.h
+@@ -38,6 +38,7 @@
+ #include <uk/arch/types.h>
+ #include <uk/list.h>
+ #include <uk/alloc.h>
++#include <uk/mutex.h>
+ #ifdef CONFIG_LIBUKPAGING
+ #include <uk/paging.h>
+ #endif /* CONFIG_LIBUKPAGING */
+@@ -67,6 +68,12 @@ struct uk_vas {
+ 	/** List of VMAs, sorted by address */
+ 	struct uk_list_head vma_list;
+ 
++	/** Serializes vma_list walks and mutations. All threads share this
++	 *  VAS (there is exactly one kernel_vas), so mmap/munmap/mprotect/
++	 *  madvise from CLONE_VM siblings and the lockless vmem_vma_find()
++	 *  walk on every page fault race without this. */
++	struct uk_mutex vma_lock;
++
+ 	/** VAS flags */
+ #define UK_VAS_FLAG_NO_PAGING		0x1 /* On-demand paging disabled */
+ 	unsigned long flags;
+diff --git a/lib/ukvmem/vmem.c b/lib/ukvmem/vmem.c
+index 61a00ace..eed6b571 100644
+--- a/lib/ukvmem/vmem.c
++++ b/lib/ukvmem/vmem.c
+@@ -17,6 +17,7 @@
+ #include <uk/alloc.h>
+ #include <uk/assert.h>
+ #include <uk/list.h>
++#include <uk/mutex.h>
+ #include <uk/config.h>
+ 
+ /*
+@@ -67,6 +68,7 @@ int uk_vas_init(struct uk_vas *vas, struct uk_pagetable *pt __maybe_unused,
+ 	vas->flags = 0;
+ 
+ 	UK_INIT_LIST_HEAD(&vas->vma_list);
++	uk_mutex_init_config(&vas->vma_lock, UK_MUTEX_CONFIG_RECURSE);
+ 
+ 	return 0;
+ }
+@@ -75,10 +77,12 @@ void uk_vas_destroy(struct uk_vas *vas)
+ {
+ 	struct uk_vma *vma, *next;
+ 
++	uk_mutex_lock(&vas->vma_lock);
+ 	uk_list_for_each_entry_safe(vma, next, &vas->vma_list, vma_list) {
+ 		vmem_vma_unmap(vma, vma->start, uk_vma_len(vma));
+ 		vmem_vma_unlink_and_free(vma);
+ 	}
++	uk_mutex_unlock(&vas->vma_lock);
+ 
+ 	UK_ASSERT(uk_list_empty(&vas->vma_list));
+ 
+@@ -125,7 +129,13 @@ static struct uk_vma *vmem_vma_find(struct uk_vas *vas, __vaddr_t vaddr,
+ 
+ const struct uk_vma *uk_vma_find(struct uk_vas *vas, __vaddr_t vaddr)
+ {
+-	return vmem_vma_find(vas, vaddr, 0);
++	const struct uk_vma *vma;
++
++	uk_mutex_lock(&vas->vma_lock);
++	vma = vmem_vma_find(vas, vaddr, 0);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return vma;
+ }
+ 
+ static int vmem_vma_find_range(struct uk_vas *vas, __vaddr_t *vaddr, __sz *len,
+@@ -504,8 +514,8 @@ static void vmem_vma_unmap_and_free_vmas(struct uk_vma *start,
+ 	vmem_vma_unmap_and_free(end);
+ }
+ 
+-int uk_vma_unmap(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+-		 unsigned long flags)
++static int vmem_op_unmap(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++			 unsigned long flags)
+ {
+ 	struct uk_vma *vma_start = __NULL, *vma_end;
+ 	int strict = (flags & UK_VMA_FLAG_STRICT_VMA_CHECK);
+@@ -532,6 +542,18 @@ int uk_vma_unmap(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+ 	return 0;
+ }
+ 
++int uk_vma_unmap(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++		 unsigned long flags)
++{
++	int rc;
++
++	uk_mutex_lock(&vas->vma_lock);
++	rc = vmem_op_unmap(vas, vaddr, len, flags);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return rc;
++}
++
+ static __vaddr_t vmem_first_fit(struct uk_vas *vas, __vaddr_t base, __sz align,
+ 				__sz len)
+ {
+@@ -601,9 +623,9 @@ static int vmem_mapx_populate(struct uk_pagetable *pt __unused,
+ 	return 0;
+ }
+ 
+-int uk_vma_map(struct uk_vas *vas, __vaddr_t *vaddr, __sz len,
+-	       unsigned long attr, unsigned long flags, const char *name,
+-	       const struct uk_vma_ops *ops, void *args)
++static int vmem_op_map(struct uk_vas *vas, __vaddr_t *vaddr, __sz len,
++		       unsigned long attr, unsigned long flags, const char *name,
++		       const struct uk_vma_ops *ops, void *args)
+ {
+ 	unsigned int order = UK_VMA_MAP_SIZE_TO_ORDER(flags);
+ 	int rc, to_lvl, algn_lvl, strict;
+@@ -773,6 +795,19 @@ int uk_vma_map(struct uk_vas *vas, __vaddr_t *vaddr, __sz len,
+ 	return 0;
+ }
+ 
++int uk_vma_map(struct uk_vas *vas, __vaddr_t *vaddr, __sz len,
++	       unsigned long attr, unsigned long flags, const char *name,
++	       const struct uk_vma_ops *ops, void *args)
++{
++	int rc;
++
++	uk_mutex_lock(&vas->vma_lock);
++	rc = vmem_op_map(vas, vaddr, len, attr, flags, name, ops, args);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return rc;
++}
++
+ int uk_vma_op_set_attr(struct uk_vma *vma, unsigned long attr)
+ {
+ 	unsigned long pgs = uk_vma_len(vma) / UK_PAGING_PAGE_SIZE;
+@@ -835,8 +870,8 @@ static void vmem_vma_set_attr_vmas(struct uk_vma *start, struct uk_vma *end,
+ 	vmem_vma_try_merge_with_prev(end);
+ }
+ 
+-int uk_vma_set_attr(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+-		    unsigned long attr, unsigned long flags)
++static int vmem_op_set_attr(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++			    unsigned long attr, unsigned long flags)
+ {
+ 	struct uk_vma *vma_start = __NULL, *vma_end;
+ 	int strict = (flags & UK_VMA_FLAG_STRICT_VMA_CHECK);
+@@ -859,6 +894,18 @@ int uk_vma_set_attr(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+ 	return 0;
+ }
+ 
++int uk_vma_set_attr(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++		    unsigned long attr, unsigned long flags)
++{
++	int rc;
++
++	uk_mutex_lock(&vas->vma_lock);
++	rc = vmem_op_set_attr(vas, vaddr, len, attr, flags);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return rc;
++}
++
+ static int vmem_mapx_advise(struct uk_pagetable *pt,
+ 			    __vaddr_t vaddr, __vaddr_t pt_vaddr,
+ 			    unsigned int level, __pte_t *pte, void *user)
+@@ -936,8 +983,8 @@ static int vmem_vma_advise(struct uk_vma *vma, __vaddr_t vaddr, __sz len,
+ 	return VMA_ADVISE(vma, vaddr, len, advice);
+ }
+ 
+-int uk_vma_advise(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+-		  unsigned long advice, unsigned long flags)
++static int vmem_op_advise(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++			  unsigned long advice, unsigned long flags)
+ {
+ 	struct uk_vma *vma_start = __NULL, *vma_end, *vma;
+ 	int strict = (flags & UK_VMA_FLAG_STRICT_VMA_CHECK);
+@@ -970,6 +1017,18 @@ int uk_vma_advise(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
+ 	return vmem_vma_advise(vma, vaddr, vend - vaddr, advice);
+ }
+ 
++int uk_vma_advise(struct uk_vas *vas, __vaddr_t vaddr, __sz len,
++		  unsigned long advice, unsigned long flags)
++{
++	int rc;
++
++	uk_mutex_lock(&vas->vma_lock);
++	rc = vmem_op_advise(vas, vaddr, len, advice, flags);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return rc;
++}
++
+ #ifdef CONFIG_LIBUKPAGING
+ static inline int vmem_largest_level(__vaddr_t vaddr, __sz len,
+ 				   unsigned int max_lvl)
+@@ -1050,8 +1109,8 @@ static int vmem_mapx_pagefault(struct uk_pagetable *pt __unused,
+ 	return 0;
+ }
+ 
+-int vmem_pagefault(__vaddr_t vaddr, unsigned int type,
+-		   struct uk_lcpu_regs *regs)
++static int vmem_op_pagefault(__vaddr_t vaddr, unsigned int type,
++			     struct uk_lcpu_regs *regs)
+ {
+ 	const unsigned int demand_lvl =
+ 		UK_PAGING_PAGE_SHIFT_Lx(CONFIG_LIBUKVMEM_DEMAND_PAGE_IN_SIZE);
+@@ -1131,4 +1190,20 @@ int vmem_pagefault(__vaddr_t vaddr, unsigned int type,
+ 	return uk_paging_page_mapx(pt, vbase, 0, 1, ctx.vma->attr,
+ 				UK_PAGING_PAGE_FLAG_SIZE(lvl) | flags, &mapx);
+ }
++
++int vmem_pagefault(__vaddr_t vaddr, unsigned int type,
++		   struct uk_lcpu_regs *regs)
++{
++	struct uk_vas *vas = uk_vas_get_active();
++	int rc;
++
++	if (unlikely(!vas || vas->flags & UK_VAS_FLAG_NO_PAGING))
++		return -EFAULT;
++
++	uk_mutex_lock(&vas->vma_lock);
++	rc = vmem_op_pagefault(vaddr, type, regs);
++	uk_mutex_unlock(&vas->vma_lock);
++
++	return rc;
++}
+ #endif /* CONFIG_LIBUKPAGING */
